@@ -24,11 +24,15 @@ $skill-installer install https://github.com/ohmuyi/muyi-codex-skills
 
 如果你想一次安装这套仓库中的全部 skills，直接使用上面的整仓安装命令即可。
 
+当你把 GitHub 仓库根 URL 交给 `$skill-installer` 时，它会把这个 URL 当作一个 skills 仓库入口，而不是单个 skill 目录。对于这种仓库入口，安装器可能先检查本地已安装的 skill，再去远端探测仓库里哪些目录包含 `SKILL.md`，然后逐个安装未冲突的 skill。这属于正常行为，不表示安装失败。
+
 如果你只想安装单个 skill，也可以指向具体目录安装。例如安装 `muyi-translate`：
 
 ```text
 $skill-installer install https://github.com/ohmuyi/muyi-codex-skills/tree/main/skills/muyi-translate
 ```
+
+如果你希望安装过程更确定、输出更直接，或者只想避免仓库探测提示，优先使用这种带具体 skill 路径的安装方式。
 
 ## 更新说明
 
