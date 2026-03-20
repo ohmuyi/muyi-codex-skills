@@ -151,6 +151,12 @@ translation.md
 
 这意味着你不仅能拿到最终译文，还能看到它的分析、提示词、初稿、批判审阅和修订过程。
 
+## Credits
+
+`muyi-translate` 基于 [baoyu-translate](https://github.com/JimLiu/baoyu-skills/tree/main/skills/baoyu-translate) 改造而成，上游项目是 [JimLiu/baoyu-skills](https://github.com/JimLiu/baoyu-skills)。
+
+本仓库在保留原有思路的基础上，针对 Codex 的使用场景、目录结构、安装方式和工作流做了调整。上游仓库当前在 README 中声明其项目使用 MIT 许可。
+
 ## 仓库结构
 
 本仓库当前结构如下：
