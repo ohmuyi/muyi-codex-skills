@@ -24,12 +24,14 @@ $skill-installer install https://github.com/ohmuyi/muyi-codex-skills
 
 如果你想一次安装这套仓库中的全部 skills，直接使用上面的整仓安装命令即可。
 
+这个仓库遵循安装器默认使用的目录布局，把可安装 skill 放在 `skills/.curated/<skill-name>/` 下。这样在整仓安装时，更容易命中安装器默认的 `skills/.curated` 路径，也更接近官方 skills 仓库的组织方式。
+
 当你把 GitHub 仓库根 URL 交给 `$skill-installer` 时，它会把这个 URL 当作一个 skills 仓库入口，而不是单个 skill 目录。对于这种仓库入口，安装器可能先检查本地已安装的 skill，再去远端探测仓库里哪些目录包含 `SKILL.md`，然后逐个安装未冲突的 skill。这属于正常行为，不表示安装失败。
 
 如果你只想安装单个 skill，也可以指向具体目录安装。例如安装 `muyi-translate`：
 
 ```text
-$skill-installer install https://github.com/ohmuyi/muyi-codex-skills/tree/main/skills/muyi-translate
+$skill-installer install https://github.com/ohmuyi/muyi-codex-skills/tree/main/skills/.curated/muyi-translate
 ```
 
 如果你希望安装过程更确定、输出更直接，或者只想避免仓库探测提示，优先使用这种带具体 skill 路径的安装方式。
@@ -49,7 +51,7 @@ $skill-installer install https://github.com/ohmuyi/muyi-codex-skills
 如果你只安装了某个单独的 skill，也可以继续使用对应目录 URL 重新安装，例如：
 
 ```text
-$skill-installer install https://github.com/ohmuyi/muyi-codex-skills/tree/main/skills/muyi-translate
+$skill-installer install https://github.com/ohmuyi/muyi-codex-skills/tree/main/skills/.curated/muyi-translate
 ```
 
 如果你的本地 Codex 提示同名 skill 已存在，或者没有立即识别到新版本，请按本地提示处理后重新执行对应命令。
@@ -158,11 +160,12 @@ translation.md
 ```text
 muyi-codex-skills/
   skills/
-    muyi-translate/
+    .curated/
+      muyi-translate/
   _templates/
     skill/
 ```
 
-`skills/` 用于存放实际可安装的 skills。每个 skill 都是一个独立目录，至少包含 `SKILL.md`，通常还会包含 `agents/`、`scripts/`、`references/` 和 `assets/`。
+`skills/.curated/` 用于存放实际可安装的 skills。每个 skill 都是一个独立目录，至少包含 `SKILL.md`，通常还会包含 `LICENSE.txt`、`agents/`、`scripts/`、`references/` 和 `assets/`。
 
 `_templates/skill/` 是新建 skill 时可复用的模板目录，不会作为实际 skill 安装。
