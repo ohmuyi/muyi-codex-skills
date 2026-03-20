@@ -1,0 +1,7 @@
+interface:
+  display_name: "Muyi Translate"
+  short_description: "Translate long-form content with refinement"
+  default_prompt: "Use $muyi-translate to translate a Markdown article with consistent terminology and the right level of refinement."
+
+policy:
+  allow_implicit_invocation: true
