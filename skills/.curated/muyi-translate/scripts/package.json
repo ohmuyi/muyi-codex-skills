@@ -1,6 +1,9 @@
 {
   "name": "muyi-translate-chunk",
   "private": true,
+  "scripts": {
+    "build": "bun build main.ts --target bun --outfile main.bundle.js"
+  },
   "dependencies": {
     "markdown-it": "14.1.1"
   }

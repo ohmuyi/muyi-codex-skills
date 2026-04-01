@@ -20,8 +20,11 @@ description: "Use when the user asks to translate or localize an article, docume
 - `references/glossary-en-zh.md`: built-in EN -> ZH glossary
 
 ## Runtime
-- Prefer `bun` for the chunking script.
-- If `bun` is unavailable but `npx` exists, use `npx -y bun`.
+- Prefer the bundled CLI at `scripts/main.bundle.js` for chunking so runtime translation does not depend on installing `node_modules`.
+- Resolve script paths relative to this skill directory, never relative to the task cwd.
+- Prefer `bun` to run the bundled CLI.
+- If `bun` is unavailable but `npx` exists, `npx -y bun` can run the bundled CLI as a fallback, but it may require network access on first use.
+- If the bundle is missing and you are maintaining the skill, run `bun install` and `bun run build` inside `scripts/`, then use the bundled CLI.
 - If neither is available, explain that automated chunking is unavailable and either install Bun or chunk manually.
 
 ## Preference lookup
@@ -66,16 +69,20 @@ If no file exists, do not silently assume a persistent profile. Before translati
    - Quick mode never chunks.
    - Normal and refined modes translate as a single unit below `chunk_threshold`.
    - At or above the threshold, extract terminology first, then chunk the Markdown.
-5. Chunk long Markdown with `scripts/main.ts`.
+5. Chunk long Markdown with the bundled CLI `scripts/main.bundle.js`.
+
+Resolve the script path relative to the directory containing this `SKILL.md`, not relative to the current task directory.
 
 ```bash
-bun scripts/main.ts <file> --max-words <n> --output-dir <output-dir>
+SKILL_DIR="<absolute-path-to-muyi-translate>"
+bun "$SKILL_DIR/scripts/main.bundle.js" <file> --max-words <n> --output-dir <output-dir>
 ```
 
 If only `npx` is available:
 
 ```bash
-npx -y bun scripts/main.ts <file> --max-words <n> --output-dir <output-dir>
+SKILL_DIR="<absolute-path-to-muyi-translate>"
+npx -y bun "$SKILL_DIR/scripts/main.bundle.js" <file> --max-words <n> --output-dir <output-dir>
 ```
 
 This writes chunk files under `<output-dir>/chunks/`.
